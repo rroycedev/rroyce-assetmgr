@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">
+
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -12,15 +14,15 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="username" class="col-sm-4 col-form-label text-md-right">Username</label>
+                            <label for="uid" class="col-sm-4 col-form-label text-md-right">uid</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" 
-                                            value="{{ old('username') }}" required autofocus>
+                                <input id="uid" type="text" class="form-control{{ $errors->has('uid') ? ' is-invalid' : '' }}" name="uid" 
+                                            value="{{ old('uid') }}" required autofocus>
 
-                                @if ($errors->has('username'))
+                                @if ($errors->has('uid'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('uid') }}</strong>
                                     </span>
                                 @endif
                             </div>

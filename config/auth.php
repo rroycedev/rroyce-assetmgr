@@ -1,6 +1,6 @@
 <?php
 
-return [
+$ret = [
 
     /*
     |--------------------------------------------------------------------------
@@ -66,14 +66,9 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => env('ASSETMGR_USER_PROVIDER_DRIVER', 'eloquent'),
             'model' => App\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        ]
     ],
 
     /*
@@ -100,3 +95,5 @@ return [
     ],
 
 ];
+
+return $ret;

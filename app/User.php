@@ -9,13 +9,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
+//    protected $primaryKey = 'username';
+
+    /* The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'uid', 'first_name', 'last_name', 'email', 'password',
     ];
 
     /**
@@ -26,4 +27,27 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getAuthIdentifierName() {
+        return "uid";
+    }
+
+    public function getUsername() {
+        return $this->attributes["uid"];
+    }
+
+    public function getEmail() {
+        return $this->attributes["mail"];
+    }
+
+    public function getFirstName() {
+        return $this->attributes["first_name"];
+    }
+
+    public function getLastName() {
+        return $this->attributes["last_name"];
+    }
+
+//    departmentNumber
+    
 }

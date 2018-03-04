@@ -14,11 +14,11 @@ class MakeUserTableWithUsername extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->string('username', 60)->after('id');
+            $table->string('uid', 60)->after('id');
             $table->dropColumn('name');
-            $table->string('first_name', 60)->after('username');
+            $table->string('first_name', 60)->after('uid');
             $table->string('last_name', 60)->after('first_name');
-            $table->unique('username');
+            $table->unique('uid');
         });
     }
 
@@ -33,7 +33,7 @@ class MakeUserTableWithUsername extends Migration
         Schema::table('users', function($table) {
             $table->dropColumn('first_name');
             $table->dropColumn('last_name');
-            $table->dropColumn('username');
+            $table->dropColumn('uid');
             $table->string('name', 255)->after('id');
         });
     }

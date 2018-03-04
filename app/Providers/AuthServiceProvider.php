@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        if (env('ASSETMGR_LOG_SQL_QUERIES', false)) {
+            \DB::listen(function ($query) {
+                \Log::info('SQL> ' . $query->sql);
+            });
+        }
     }
 }

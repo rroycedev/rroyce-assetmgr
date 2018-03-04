@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if (env('ASSETMGR_LOG_SQL_QUERIES', false)) {
+            \DB::listen(function ($query) {
+                \Log::info('SQL> ' . $query->sql);
+            });
+        }
     }
 }
