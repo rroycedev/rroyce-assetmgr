@@ -1,6 +1,18 @@
 # rroyce-assetmgr
 An asset manager website using laravel package adldap2/adldap2-laravel
 
+To get Webpack to compiler for vuejs-devtools you need to add the following to the end of the file
+./node_modules/laravel-mix/setup/webpack.config.js:
+
+module.exports.node = {
+        fs: 'empty',
+        child_process: 'empty'
+      }
+externals: {
+        child_process: 'child_process'
+      }
+
+      
 Installation for Database Authentication 
 ========================================
 

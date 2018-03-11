@@ -1,0 +1,45 @@
+.app-header {
+    background-color:   #4285F4 !important
+}
+
+.first-name-input, .last-name-input {
+    width: 200px !important;   
+}
+
+.form-label {
+        margin-right: 10px !important;
+}
+
+.card-header {
+    background-color: #4285F4 !important;
+    color: white !important;
+}
+
+.form-select {
+    border-radius: 8px !important;
+    line-height: 36px !important;
+    height: 36px !important;
+}
+
+input.app-search__input {
+    border-color: white;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.app-search__button {
+    color: white;
+}
+
+.app-nav__item {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 65px;
+}
+
+.alert {
+    border-color:#040404;
+    display:inline-block;
+    margin: auto;
+    margin-bottom: 20px;
+}

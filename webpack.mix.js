@@ -12,4 +12,21 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .copy('resources/assets/css/users.css', 'public/css')
+   .copy('resources/assets/css/assetmgr.css', 'public/css')
+   .copy('resources/assets/css/modal.css', 'public/css')
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .copy('node_modules/mdbootstrap/js', 'public/mdbootstrap/js')
+   .copy('node_modules/mdbootstrap/css', 'public/mdbootstrap/css')
+   .copy('node_modules/mdbootstrap/font', 'public/mdbootstrap/font')
+   .copy('node_modules/mdbootstrap/img', 'public/mdbootstrap/img')
+   .copy('resources/assets/bootstrap-template/docs/js/bootstrap-template.js', 'public/bootstrap-template/js')
+   .copy('resources/assets/bootstrap-template/docs/css/bootstrap-template.css', 'public/bootstrap-template/css')
+   .copy('resources/assets/font-awesome', 'public/font-awesome')
+
+//   .copy('node_modules/font-awesome-4.7.0/fonts', 'public/font-awesome-4.7.0/fonts')
+//   .copy('node_modules/font-awesome-4.7.0/css', 'public/font-awesome-4.7.0/css')
+//   .copy('node_modules/bootstrap-template/docs/js/bootstrap-template.js', 'public/bootstrap-template/js')
+//   .copy('node_modules/bootstrap-template/docs/css/bootstrap-template.css', 'public/bootstrap-template/css')
+
+;
