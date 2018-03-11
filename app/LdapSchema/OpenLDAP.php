@@ -6,6 +6,12 @@ use Adldap\Schemas\BaseSchema;
 
 class OpenLDAP extends BaseSchema
 {
+
+    public function userModel()
+    {
+        return "App\Ldap\Models\LdapUser";
+    }
+
     public function userPrincipalName()
     {
         return 'uid';

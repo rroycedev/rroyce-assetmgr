@@ -1,16 +1,14 @@
 <?php
+namespace App\Ldap\Models;
 
-namespace App;
+use Adldap\Models\User;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+class LdapUser extends User {
+        public function getAuthIdentifier() {
+                return $this->attributes["uid"][0];
+        }
 
-
-class User extends Authenticatable
-{
-    use Notifiable;
-
-
+   
 //    protected $primaryKey = 'username';
 
     /* The attributes that are mass assignable.
@@ -51,7 +49,8 @@ class User extends Authenticatable
     public function getLastName() {
         return $this->attributes["last_name"];
     }
-
-//    departmentNumber
-    
+     
+    public function getAttributes() {
+            return $this->attributes;
+    }
 }

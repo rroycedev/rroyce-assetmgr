@@ -37,7 +37,8 @@ $ret = [
     |
     */
 
-    'provider' => Adldap\Laravel\Auth\DatabaseUserProvider::class,
+//    'provider' => Adldap\Laravel\Auth\NoDatabaseUserProvider::class,
+    'provider' => App\Ldap\Database\RRNoDatabaseUserProvider::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -226,6 +227,28 @@ $ret = [
 
     /*
     |--------------------------------------------------------------------------
+    | Bind User to Model
+    |--------------------------------------------------------------------------
+    |
+    | The 'bind user to model' option allows you to access the authenticated
+    | Adldap user model instance on your laravel User model.
+    |
+    | If this option is true, you must insert the trait:
+    |
+    |   `Adldap\Laravel\Traits\AdldapUserModelTrait`
+    |
+    | Onto your User model that is configured in `config/auth.php`.
+    |
+    | Then use `Auth::user()->adldapUser` to access.
+    |
+    | This option must be true or false.
+    |
+    */
+
+    'bind_user_to_model' => env('ADLDAP_BIND_USER_TO_MODEL', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Login Fallback
     |--------------------------------------------------------------------------
     |
@@ -257,10 +280,23 @@ $ret = [
     | to the DatabaseUserProvider.
     |
     */
+/*
+    //  Synch attributes for database engine
 
     'sync_attributes' => [
 
         'uid' => 'uid',
+        'email' => 'mail',
+        'first_name' => 'givenname',
+        'last_name' => 'sn'
+    ],
+*/
+
+    // Synch attributes for LDAP engine
+
+    'sync_attributes' => [
+
+        'uid' => 'entryUUID',
         'email' => 'mail',
         'first_name' => 'givenname',
         'last_name' => 'sn'

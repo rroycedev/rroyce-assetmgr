@@ -2,7 +2,7 @@
 
 namespace App\LdapSchema;
 
-use Adldap\Models\User;
+use App\LdapSchema\User;
 use Adldap\Models\Entry;
 use Adldap\Models\Group;
 use Adldap\Models\Contact;
@@ -1132,7 +1132,9 @@ abstract class BaseSchema implements SchemaInterface
      */
     public function userModel()
     {
-        return User::class;
+        echo "BaseSchema::userModel returning...<br>";
+
+        return App\User::class;
     }
 
     /**

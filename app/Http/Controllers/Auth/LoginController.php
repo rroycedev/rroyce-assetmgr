@@ -8,6 +8,7 @@ use Cookie;
 use Illuminate\Support\Facades\Event;
 use Adldap\Laravel\Events\AuthenticationRejected;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -22,14 +23,14 @@ class LoginController extends Controller
     |
     */
 
-   /*
+   
     use AuthenticatesUsers {
-        AuthenticatesUsers::login as peformLogin;
-        AuthenticatesUsers::logout as doLogout;
+        AuthenticatesUsers::login as performLogin;
+   //     AuthenticatesUsers::logout as doLogout;
     }
-*/
 
-    use AuthenticatesUsers;
+
+   //  use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -53,43 +54,21 @@ class LoginController extends Controller
         return "uid";
     }
 
-    /*
-    public function performLogin(Request $request) {
-        if (!$request) {
-            return redirect('/exception');
+    public function login(Request $request)
+    {
+        if (Auth::attempt($request->only(['uid', 'password']))) {
+     
+            $user = Auth::user();
+        
+            return redirect()->to('home')
+                ->withMessage('Logged in!');
         }
 
-        \Log::info('LoginController: Logging in....');
+        $errors = array(
+            "uid" => "Username and/or password is not correct"
+        );
 
-        $result = $this->login($request);
-
-        $user = \Auth::user();
-
-     
-        $username = $user->getUsername();
-        $firstname = $user->getFirstName();
-        $lastname = $user->getLastName();
-     //   $groupname = $user->getGroupName();
-
-        Cookie::queue("auth-loggedin", true, 60 * 24);
-        Cookie::queue("auth-username", $username, 60 * 24);
-        Cookie::queue("auth-firstname", $firstname, 60 * 24);
-        Cookie::queue("auth-lastname", $lastname, 60 * 24);
-       // Cookie::queue("auth-groupname", $groupname, 60 * 24);
-       
-        return $result;
+        return redirect()->to('login')->withErrors($errors);
     }
 
-    public function logout(Request $request = null) {
-        \Log::info('LoginController: Logging out....');
-
-        Cookie::queue("auth-loggedin", false, 60 * 24);
-        Cookie::queue("auth-username", "", 60 * 24);
-        Cookie::queue("auth-firstname", "", 60 * 24);
-        Cookie::queue("auth-lastname", "", 60 * 24);
-        Cookie::queue("auth-groupname", "", 60 * 24);
-
-        return $this->doLogout($request);
-    }
-    */
 }

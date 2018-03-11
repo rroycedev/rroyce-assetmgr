@@ -23,7 +23,7 @@ Installation for Database Authentication
         
         php artisan migrate
         
-        php artisan db:seed
+        php artisan db:seed --class=InitUsersTableSeeder
 
 
 Installation for LDAP Authentication 

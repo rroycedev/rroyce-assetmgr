@@ -12,7 +12,7 @@ class InitUsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'username' => 'admin',
+            'uid' => 'admin',
             'first_name' => 'Asset Manager',
             'last_name' => 'Administrator',
             'email' => str_random(10).'@gmail.com',
