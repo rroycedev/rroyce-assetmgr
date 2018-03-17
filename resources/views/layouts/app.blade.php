@@ -57,7 +57,7 @@
  
   <div id="app-header">
     <?php echo json_encode($isLoggedIn) . "<br>"; ?>
-    <app-header v-bind:isloggedin="{{ json_encode($isLoggedIn) }}"></app-header>
+    <app-header :user="{{ json_encode(Auth::user())}}"></app-header>
   </div>
 
   

@@ -53797,7 +53797,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53878,44 +53878,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        isloggedin: {
-            type: Number
+        user: {
+            type: Object
         }
     },
     methods: {
@@ -53937,340 +53904,126 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("header", { staticClass: "app-header" }, [
-    _c(
-      "a",
-      { staticClass: "app-header__logo", attrs: { href: "index.html" } },
-      [_vm._v("Royce Asset Manager")]
-    ),
-    _vm._v(" "),
-    _c("ul", { staticClass: "app-nav" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("li", { staticClass: "dropdown" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c(
-          "ul",
-          { staticClass: "dropdown-menu settings-menu dropdown-menu-right" },
-          [
-            _c("li", [
-              _vm.isloggedin == 1
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { href: "page-user.html" }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-cog fa-lg" }),
-                      _vm._v(" Settings")
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _vm.isloggedin == 1
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { href: "page-user.html" }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-user fa-lg" }),
-                      _vm._v(" Profile")
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _vm.isloggedin == 0
-                ? _c(
-                    "a",
-                    { staticClass: "dropdown-item", attrs: { href: "/login" } },
-                    [_c("i", { staticClass: "fa fa-sign-in" }), _vm._v("Login")]
-                  )
-                : _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { href: "/logout" }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-sign-out" }),
-                      _vm._v("Logout")
-                    ]
-                  )
-            ])
-          ]
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "app-search" }, [
-      _c("input", {
-        staticClass: "app-search__input",
-        attrs: { type: "search", placeholder: "Search" }
-      }),
-      _vm._v(" "),
-      _c("button", { staticClass: "app-search__button" }, [
-        _c("i", { staticClass: "fa fa-search" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "dropdown dropdown-notifications" }, [
+  return _c(
+    "header",
+    {
+      staticClass: "app-header",
+      staticStyle: { height: "59px", "padding-top": "11px" }
+    },
+    [
       _c(
         "a",
         {
-          staticClass: "app-nav__item",
-          attrs: { href: "#", "data-toggle": "dropdown" }
+          staticClass: "app-header__logo",
+          staticStyle: {
+            width: "230px",
+            padding: "0px",
+            "font-size": "24px",
+            "margin-top": "5px",
+            "font-family":
+              "'Lato, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif'"
+          },
+          attrs: { href: "index.html" }
         },
-        [
-          _c("i", {
-            staticClass: "fa fa-bell-o fa-lg",
-            attrs: { "data-count": "0" }
-          })
-        ]
+        [_vm._v("Royce Asset Manager")]
       ),
       _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "app-notification dropdown-menu dropdown-menu-right" },
-        [
-          _c("div", { staticClass: "app-notification__content" }, [
-            _c("li", [
+      _c("ul", { staticClass: "app-nav", staticStyle: { width: "200px" } }, [
+        _c("li", { staticClass: "dropdown" }, [
+          _c(
+            "a",
+            {
+              staticClass: "app-nav__item",
+              attrs: { href: "#", "data-toggle": "dropdown" }
+            },
+            [
               _c(
-                "a",
+                "div",
                 {
-                  staticClass: "app-notification__item",
-                  attrs: { href: "javascript:;" }
+                  staticStyle: { "line-height": "19px", "text-align": "center" }
                 },
                 [
-                  _c("span", { staticClass: "app-notification__icon" }, [
-                    _c("span", { staticClass: "fa-stack fa-lg" }, [
-                      _c("i", {
-                        staticClass: "fa fa-circle fa-stack-2x text-primary"
-                      }),
-                      _c("i", {
-                        staticClass: "fa fa-envelope fa-stack-1x fa-inverse"
-                      })
-                    ])
-                  ]),
+                  _c("i", { staticClass: "fa fa-user fa-lg" }),
                   _vm._v(" "),
-                  _c("div", [
-                    _c("p", { staticClass: "app-notification__message" }, [
-                      _vm._v("Lisa sent you a mail")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "app-notification__meta" }, [
-                      _vm._v("2 min ago")
-                    ])
-                  ])
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm.user != null
+                    ? _c("div", [_vm._v(_vm._s(_vm.user.uid))])
+                    : _vm._e()
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  staticClass: "app-notification__item",
-                  attrs: { href: "javascript:;" }
-                },
-                [
-                  _c("span", { staticClass: "app-notification__icon" }, [
-                    _c("span", { staticClass: "fa-stack fa-lg" }, [
-                      _c("i", {
-                        staticClass: "fa fa-circle fa-stack-2x text-danger"
-                      }),
-                      _c("i", {
-                        staticClass: "fa fa-hdd-o fa-stack-1x fa-inverse"
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("p", { staticClass: "app-notification__message" }, [
-                      _vm._v("Mail server not working")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "app-notification__meta" }, [
-                      _vm._v("5 min ago")
-                    ])
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  staticClass: "app-notification__item",
-                  attrs: { href: "javascript:;" }
-                },
-                [
-                  _c("span", { staticClass: "app-notification__icon" }, [
-                    _c("span", { staticClass: "fa-stack fa-lg" }, [
-                      _c("i", {
-                        staticClass: "fa fa-circle fa-stack-2x text-success"
-                      }),
-                      _c("i", {
-                        staticClass: "fa fa-money fa-stack-1x fa-inverse"
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("p", { staticClass: "app-notification__message" }, [
-                      _vm._v("Transaction complete")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "app-notification__meta" }, [
-                      _vm._v("2 days ago")
-                    ])
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "app-notification__content" }, [
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "app-notification__item",
-                    attrs: { href: "javascript:;" }
-                  },
-                  [
-                    _c("span", { staticClass: "app-notification__icon" }, [
-                      _c("span", { staticClass: "fa-stack fa-lg" }, [
-                        _c("i", {
-                          staticClass: "fa fa-circle fa-stack-2x text-primary"
-                        }),
-                        _c("i", {
-                          staticClass: "fa fa-envelope fa-stack-1x fa-inverse"
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("p", { staticClass: "app-notification__message" }, [
-                        _vm._v("Lisa sent you a mail")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "app-notification__meta" }, [
-                        _vm._v("2 min ago")
-                      ])
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "app-notification__item",
-                    attrs: { href: "javascript:;" }
-                  },
-                  [
-                    _c("span", { staticClass: "app-notification__icon" }, [
-                      _c("span", { staticClass: "fa-stack fa-lg" }, [
-                        _c("i", {
-                          staticClass: "fa fa-circle fa-stack-2x text-danger"
-                        }),
-                        _c("i", {
-                          staticClass: "fa fa-hdd-o fa-stack-1x fa-inverse"
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("p", { staticClass: "app-notification__message" }, [
-                        _vm._v("Mail server not working")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "app-notification__meta" }, [
-                        _vm._v("5 min ago")
-                      ])
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "app-notification__item",
-                    attrs: { href: "javascript:;" }
-                  },
-                  [
-                    _c("span", { staticClass: "app-notification__icon" }, [
-                      _c("span", { staticClass: "fa-stack fa-lg" }, [
-                        _c("i", {
-                          staticClass: "fa fa-circle fa-stack-2x text-success"
-                        }),
-                        _c("i", {
-                          staticClass: "fa fa-money fa-stack-1x fa-inverse"
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("p", { staticClass: "app-notification__message" }, [
-                        _vm._v("Transaction complete")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "app-notification__meta" }, [
-                        _vm._v("2 days ago")
-                      ])
-                    ])
-                  ]
-                )
-              ])
-            ])
-          ]),
+            ]
+          ),
           _vm._v(" "),
-          _c("li", { staticClass: "app-notification__footer" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _vm._v("See all notifications.")
-            ])
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "app-nav__item",
-        attrs: { href: "#", "data-toggle": "dropdown" }
-      },
-      [_c("i", { staticClass: "fa fa-user fa-lg" })]
-    )
-  }
-]
+          _c(
+            "ul",
+            { staticClass: "dropdown-menu settings-menu dropdown-menu-right" },
+            [
+              _c("li", [
+                _vm.user != null
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "page-user.html" }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-cog fa-lg" }),
+                        _vm._v(" Settings")
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm.user != null
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "page-user.html" }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-user fa-lg" }),
+                        _vm._v(" Profile")
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm.user == null
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "/login" }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-sign-in" }),
+                        _vm._v("Login")
+                      ]
+                    )
+                  : _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "/logout" }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-sign-out" }),
+                        _vm._v("Logout")
+                      ]
+                    )
+              ])
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54366,7 +54119,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54377,14 +54130,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -54436,43 +54181,7 @@ var render = function() {
     _vm._v(" "),
     _c("aside", { staticClass: "app-sidebar" }, [
       _vm.username != ""
-        ? _c("div", { staticClass: "app-sidebar__user" }, [
-            _c("i", {
-              staticClass: "fa fa-user fa-4x",
-              staticStyle: { "margin-right": "5px" }
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: { "margin-top": "auto", "margin-bottom": "auto" }
-              },
-              [
-                _c(
-                  "p",
-                  {
-                    staticClass: "app-sidebar__user-name",
-                    attrs: { id: "logged_in_user_fullname" }
-                  },
-                  [_vm._v(_vm._s(_vm.username))]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "app-sidebar__user-designation" }, [
-                  _vm._v(_vm._s(_vm.groupname))
-                ])
-              ]
-            )
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.username != ""
-        ? _c("ul", { staticClass: "app-menu" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
+        ? _c("ul", { staticClass: "app-menu" }, [_vm._m(0)])
         : _vm._e()
     ])
   ])
@@ -54482,91 +54191,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "treeview" }, [
-      _c(
-        "a",
-        {
-          staticClass: "app-menu__item",
-          attrs: { href: "#", "data-toggle": "treeview" }
-        },
-        [
-          _c("i", { staticClass: "app-menu__icon fa fa-laptop" }),
-          _c("span", { staticClass: "app-menu__label" }, [_vm._v("Hardware")]),
-          _c("i", { staticClass: "treeview-indicator fa fa-angle-right" })
-        ]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "treeview-menu" }, [
-        _c("li", [
-          _c(
-            "a",
-            {
-              staticClass: "treeview-item",
-              attrs: { href: "bootstrap-components.html" }
-            },
-            [
-              _c("i", { staticClass: "icon fa fa-circle-o" }),
-              _vm._v(" Bootstrap Elements")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            {
-              staticClass: "treeview-item",
-              attrs: { href: "http://fontawesome.io/icons/", target: "_blank" }
-            },
-            [
-              _c("i", { staticClass: "icon fa fa-circle-o" }),
-              _vm._v(" Font Icons")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            { staticClass: "treeview-item", attrs: { href: "ui-cards.html" } },
-            [_c("i", { staticClass: "icon fa fa-circle-o" }), _vm._v(" Cards")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            { staticClass: "treeview-item", attrs: { href: "widgets.html" } },
-            [
-              _c("i", { staticClass: "icon fa fa-circle-o" }),
-              _vm._v(" Widgets")
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", [
-      _c(
-        "a",
-        { staticClass: "app-menu__item", attrs: { href: "charts.html" } },
-        [
-          _c("i", { staticClass: "app-menu__icon fa fa-pie-chart" }),
-          _c("span", { staticClass: "app-menu__label" }, [_vm._v("Software")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { staticClass: "app-menu__item", attrs: { href: "/user" } }, [
+      _c("a", { staticClass: "app-menu__item", attrs: { href: "/users" } }, [
         _c("i", { staticClass: "app-menu__icon fa fa-user" }),
         _c("span", { staticClass: "app-menu__label" }, [_vm._v("Users")])
       ])
