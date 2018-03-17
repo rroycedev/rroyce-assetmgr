@@ -13,16 +13,16 @@
                             <th style="min-width: 150px;">Username</th>
                             <th style="min-width: 150px;">First Name</th>
                             <th style="min-width: 150px;">Last Name</th>
-                            <th style="min-width: 150px;">Role</th>
+                            <th style="min-width: 150px;">Group</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="user in users" :key="user.userName">
+                        <tr v-for="user in users" :key="user.entryUUID">
                             <td>{{ user.userName }}</td>
                             <td>{{ user.givenName }}</td>
                             <td>{{ user.surName }}</td>
-                            <td>{{ user.groupName }}</td>
+                            <td>{{ user.group }}</td>
                             <td>
                                 <div style="float: left;"><a :href="updateLink(user.userName)" class="btn btn-primary">Update</a></div>
                                 <div style="float: left;margin-left: 5px;">

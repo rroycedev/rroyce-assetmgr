@@ -63,7 +63,7 @@
   
 
   <div id="side-bar">
-    <side-bar :username="{{ json_encode($username) }}" :groupname="{{ json_encode($groupname) }}"></side-bar>
+    <side-bar :user="{{ json_encode(Auth::user()) }}" :groupname="{{ json_encode($groupname) }}"></side-bar>
   </div>
 
   

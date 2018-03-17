@@ -20,7 +20,8 @@ use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Support\Facades\Config;
 use Adldap\Laravel\AdldapServiceProvider;
 
-use App\Classes\LdapHelper;
+use App\Helpers\LdapHelper;
+use App\Helpers\DatabaseAuthHelper;
 use App\LdapUser;
 use ErrorException;
 
@@ -79,7 +80,7 @@ class UsersController extends Controller
 
         switch ($this->userProviderDriverName()) {
             case "eloquent":
-                $data = array();
+                $data = DatabaseAuthHelper::GetUsers();
                 break;
             case "ldap":
                 $data = LdapHelper::GetUsers();
@@ -92,13 +93,7 @@ class UsersController extends Controller
     private function userGroups() {
         switch ($this->userProviderDriverName()) {
             case "eloquent":
-                $groups = array(
-                        array("group_id" => 1, "group_name" => "Group 1"), 
-                        array("group_id" => 2, "group_name" => "Group 2"),
-                        array("group_id" => 3, "group_name" => "Group 3")
-                );                                                
-    
-                return $groups;
+                return DatabaseAuthHelper::GetRoles();
             case "ldap":
                 return LdapHelper::GetLdapLookupGroups();
             }
@@ -106,7 +101,10 @@ class UsersController extends Controller
     }
     public function create(Request $request)
     {
-        $data = ["data" => array("groups" => $this->userGroups(), "message" => "", "messagetype" => "")];
+        $message = $request->session()->get('message');
+        $messagetype = $request->session()->get('messagetype');
+                
+        $data = ["data" => array("groups" => $this->userGroups(), "message" => $message, "messagetype" => $messagetype)];
 
         return view('user.create', $data );
     } 
@@ -119,10 +117,39 @@ class UsersController extends Controller
 
         return view('user.edit', ["data" => array("groups" => $groups, "user" => $data, "orgUnits" => $this->orgUnits, "orgRoles" => $this->orgRoles)]);       
     } 
-    public function store(Request $request)
-    { 
-        $formInput = $request->all();
 
+    private function handleCreateEloquentUser($formInput, $request) {
+        $username = $formInput["username"];
+        $firstName = $formInput["first_name"];
+        $lastName = $formInput["last_name"];
+        $userPassword = $formInput["userpassword"];
+        $roleId = $formInput["group_id"];
+        
+        echo "Calling Eloquent create user<br>";
+ 
+
+        $roles = DatabaseAuthHelper::GetRoles();
+
+        $roleName = $roles[$roleId];
+
+        try {
+            DatabaseAuthHelper::CreateUser($username, $firstName, $lastName, $userPassword, '', $roleId, $roleName);
+
+
+            $request->session()->put('message', "User $username has been created successfully");
+            $request->session()->put('messagetype', "success");
+        }
+        catch(ErrorException $ex) {
+            echo "Error: " . $ex->getMessage() . "<br>";
+
+            exit(1);
+
+            $request->session()->put('message', $ex->getMessage());
+            $request->session()->put('messagetype', "error");
+        }        
+    }
+
+    private function handleCreateLdapUser($formInput, $request) {
         $username = $formInput["username"];
         $firstName = $formInput["first_name"];
         $lastName = $formInput["last_name"];
@@ -143,6 +170,30 @@ class UsersController extends Controller
             $request->session()->put('message', $ex->getMessage());
             $request->session()->put('messagetype', "error");
         }        
+    }
+
+    public function store(Request $request)
+    { 
+        $formInput = $request->all();
+
+        $username = $formInput["username"];
+        $firstName = $formInput["first_name"];
+        $lastName = $formInput["last_name"];
+        $userPassword = $formInput["userpassword"];
+        $groupId = $formInput["group_id"];
+        echo "Provider: " . $this->userProviderDriverName() . "\n";
+
+
+
+        switch ($this->userProviderDriverName()) {
+        case "eloquent":
+            $this->handleCreateEloquentUser($formInput, $request);
+            break;
+        case "ldap":
+            $this->handleCreateLdapUser($formInput, $request);
+            break;
+        }
+
 
         return redirect()->route('user.create');
     }   

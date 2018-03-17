@@ -52931,14 +52931,14 @@ var render = function() {
             _c(
               "tbody",
               _vm._l(_vm.users, function(user) {
-                return _c("tr", { key: user.entryUUID }, [
+                return _c("tr", { key: user.userName }, [
                   _c("td", [_vm._v(_vm._s(user.userName))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(user.givenName))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(user.surName))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.group))]),
+                  _c("td", [_vm._v(_vm._s(user.groupName))]),
                   _vm._v(" "),
                   _c("td", [
                     _c("div", { staticStyle: { float: "left" } }, [
@@ -53051,7 +53051,7 @@ var staticRenderFns = [
           _vm._v("Last Name")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { "min-width": "150px" } }, [_vm._v("Group")]),
+        _c("th", { staticStyle: { "min-width": "150px" } }, [_vm._v("Role")]),
         _vm._v(" "),
         _c("th", [_vm._v(" ")])
       ])
@@ -53249,6 +53249,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     props: {
         groups: {
             type: Array
@@ -53258,22 +53259,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         messagetype: {
             type: String
-        },
-        username: {
-            type: String
-        },
-        first_name: {
-            type: String
-        },
-        last_name: {
-            type: String
-        },
-        userpassword: {
-            type: String
-        },
-        groupid: {
-            type: Number
         }
+    },
+    data: function data() {
+        return {
+            username: '',
+            first_name: '',
+            last_name: '',
+            userpassword: '',
+            groupid: 0
+        };
     },
     created: function created() {
         console.log("create-user created");
@@ -53523,8 +53518,11 @@ var render = function() {
             _vm._l(_vm.groups, function(group) {
               return _c(
                 "option",
-                { key: group.group_id, domProps: { value: group.group_id } },
-                [_vm._v(_vm._s(group.group_name))]
+                {
+                  key: group.user_role_id,
+                  domProps: { value: group.user_role_id }
+                },
+                [_vm._v(_vm._s(group.role_name))]
               )
             })
           )
@@ -53543,7 +53541,7 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   staticStyle: { float: "left" },
-                  attrs: { id: "create-user-btn", disabled: "" },
+                  attrs: { id: "create-user-btn" },
                   on: { click: _vm.createUser }
                 },
                 [_vm._v("Create")]
@@ -54119,7 +54117,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54148,16 +54146,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        username: {
-            type: String
+        user: {
+            type: Object
         },
         groupname: {
             type: String
@@ -54180,8 +54173,16 @@ var render = function() {
     }),
     _vm._v(" "),
     _c("aside", { staticClass: "app-sidebar" }, [
-      _vm.username != ""
-        ? _c("ul", { staticClass: "app-menu" }, [_vm._m(0)])
+      _vm.user != null
+        ? _c("ul", { staticClass: "app-menu" }, [
+            _vm.user.user_role_id == 1
+              ? _c("li", { staticClass: "treeview" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
+              : _vm._e()
+          ])
         : _vm._e()
     ])
   ])
@@ -54191,10 +54192,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { staticClass: "app-menu__item", attrs: { href: "/users" } }, [
-        _c("i", { staticClass: "app-menu__icon fa fa-user" }),
-        _c("span", { staticClass: "app-menu__label" }, [_vm._v("Users")])
+    return _c(
+      "a",
+      {
+        staticClass: "app-menu__item",
+        attrs: { href: "#", "data-toggle": "treeview" }
+      },
+      [
+        _c("i", { staticClass: "app-menu__icon fa fa-sign-in" }),
+        _c("span", { staticClass: "app-menu__label" }, [
+          _vm._v("Authentication")
+        ]),
+        _c("i", { staticClass: "treeview-indicator fa fa-angle-right" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "treeview-menu" }, [
+      _c("li", [
+        _c("a", { staticClass: "app-menu__item", attrs: { href: "/users" } }, [
+          _c("i", { staticClass: "app-menu__icon fa fa-user" }),
+          _c("span", { staticClass: "app-menu__label" }, [_vm._v("Users")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c(
+          "a",
+          { staticClass: "app-menu__item", attrs: { href: "/user/roles" } },
+          [
+            _c("i", { staticClass: "app-menu__icon fa fa-object-group" }),
+            _c("span", { staticClass: "app-menu__label" }, [
+              _vm._v("User Roles")
+            ])
+          ]
+        )
       ])
     ])
   }

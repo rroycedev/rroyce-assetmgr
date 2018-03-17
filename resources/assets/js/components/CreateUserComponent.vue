@@ -59,13 +59,13 @@
                         </span>
                     </div>
                     <select class="form-select department-select" id="group_id" name="group_id" v-model="groupid">
-                        <option v-for="group in groups" :key="group.group_id" :value="group.group_id">{{group.group_name}}</option>
+                        <option v-for="group in groups" :key="group.user_role_id" :value="group.user_role_id">{{group.role_name}}</option>
                     </select>
                 </div>
 
                 <div class="form-group" style="width: 175px;margin: auto;r">
                     <div>
-                        <button class="btn btn-primary" id="create-user-btn" disabled style="float: left;"  v-on:click="createUser">Create</button>
+                        <button class="btn btn-primary" id="create-user-btn" style="float: left;"  v-on:click="createUser">Create</button>
                         <div style="float: left;margin-left: 5px;">
                             <a href="/user" class="btn btn-primary">Back</a>
                         </div>
@@ -80,6 +80,7 @@
 
 <script>
      export default {
+    
        props: {
            groups: {
                type: Array
@@ -89,23 +90,17 @@
             },
             messagetype: {
                 type: String
-            },
-            username: {
-                type: String
-            },
-            first_name: {
-                type: String
-            },
-            last_name: {
-                type: String
-            },
-            userpassword: {
-                type: String
-            },
-            groupid: {
-                type: Number
             }
        },
+       data: function() { 
+        return {
+           username: '',
+           first_name: '',
+           last_name: '',
+           userpassword: '',
+           groupid: 0
+        }
+       },       
       created: function()
         {
             console.log("create-user created");
