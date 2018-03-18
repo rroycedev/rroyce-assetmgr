@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'uid', 'first_name', 'last_name', 'email', 'password', 'is_system_admin', 'user_role_id'
+        'uid', 'first_name', 'last_name', 'email', 'password', 'is_system_object'
     ];
 
     /**
@@ -50,6 +51,10 @@ class User extends Authenticatable
 
     public function getLastName() {
         return $this->attributes["last_name"];
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class);
     }
 
 //    departmentNumber
