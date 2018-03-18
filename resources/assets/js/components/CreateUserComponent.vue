@@ -2,7 +2,7 @@
 
     <div>
 
-        <div class="row">
+        <div class="row" v-if="message != null && message != ''">
             <div :class="[(messagetype == 'success') ? 'alert alert-success  col-md-6 col-md-offset-6' : 'alert alert-danger  col-md-6 col-md-offset-6', 'alert alert-success  col-md-6 col-md-offset-6']" role="alert" v-if="message != ''">
                 {{ message }}
             </div>
@@ -55,12 +55,22 @@
                 <div class="input-group input-group-sm mb-4">
                     <div class="input-group-prepend">
                         <span class="input-group-text user-create-edit-label" id="inputGroup-sizing-sm">
-                            <div class="user-create-edit-label">Group</div>
+                            <div class="user-create-edit-label">Role</div>
                         </span>
                     </div>
+                    <div style="max-height: 300px;overflow-y: auto;">
+                        <ul style="margin: 0px;padding: 10px;" >
+                            <li  v-for="group in groups" :key="group.id"  style="list-style: none;" >
+                                <input type="checkbox" :name="'role_' + group.id" :id="'role_' + group.id" :value="group.id" v-model="roleIds">
+                                <label :for="'role_' + group.id">{{group.name}}</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--
                     <select class="form-select department-select" id="group_id" name="group_id" v-model="groupid">
                         <option v-for="group in groups" :key="group.user_role_id" :value="group.user_role_id">{{group.role_name}}</option>
                     </select>
+                    -->
                 </div>
 
                 <div class="form-group" style="width: 175px;margin: auto;r">
@@ -98,7 +108,8 @@
            first_name: '',
            last_name: '',
            userpassword: '',
-           groupid: 0
+           groupid: 0,
+           roleIds: [],
         }
        },       
       created: function()
@@ -111,6 +122,20 @@
             console.log(this);
         },
         methods: {
+            toggleRole(roleId) {
+                if (this._data.roleIds.includes(roleId)) {
+                    var index = this._data.roleIds.indexOf(roleId);
+                    if (index > -1) {
+                        this._data.roleIds.splice(index, 1);
+                    }
+                }
+                else {
+                    this._data.roleIds.push(roleId);
+                }
+
+                this.$forceUpdate();
+
+            },
             createUser(event) {
                 if (this._isMounted) {
                     return;

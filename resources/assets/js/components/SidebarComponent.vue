@@ -5,7 +5,7 @@
     <aside class="app-sidebar">
 
       <ul class="app-menu" v-if="user != null">
-            <li class="treeview" v-if="user.user_role_id == 1"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-sign-in"></i><span class="app-menu__label">Authentication</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <li class="treeview" v-if="hasRole(user, 'Administrator') || hasRole(user, 'User Manager')"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-sign-in"></i><span class="app-menu__label">Authentication</span><i class="treeview-indicator fa fa-angle-right"></i></a>
               <ul class="treeview-menu">
                  <li><a class="app-menu__item" href="/users"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Users</span></a></li>
                  <li><a class="app-menu__item" href="/user/roles"><i class="app-menu__icon fa fa-object-group"></i><span class="app-menu__label">User Roles</span></a></li>
@@ -25,8 +25,21 @@ export default {
         groupname: {
             type: String
         }
+    },
+        methods: {
+            hasRole(user, roleName) {
+                var found = false;
+
+                user.roles.forEach(function(role) {
+                    if (role.name == roleName) {
+                        found = true;
+                    }
+                });
+
+                return found;
+            }                   
+        }    
     }
-}
 </script>
 
 <style>

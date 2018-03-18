@@ -3,9 +3,13 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB; 
 
+use App\Role;
+use App\User;
+use App\RoleUser;
+
 class DatabaseAuthHelper {
         public  static function GetRoles() {
-                $results = DB::table('user_role')->get();
+                $results = DB::table('roles')->orderBy('name')->get();
 
                 $retResults = array();
 
@@ -29,7 +33,10 @@ class DatabaseAuthHelper {
         }
 
         public  static function GetUsers() {
-                $results = DB::table('users')->join('user_role', 'users.user_role_id', '=', 'user_role.user_role_id')->where('is_system_admin', 0)->get();
+                $results = DB::table('users')
+                        ->join('role_user', 'users.id', '=', 'role_user.user_id')
+                        ->join('roles', 'role_user.role_id', '=', 'roles.id')
+                        ->where('users.is_system_object', 0)->get();
               
                 $retResults = array();
 
@@ -44,19 +51,36 @@ class DatabaseAuthHelper {
                 return $retResults;
         }       
         
-        public static function CreateUser($username, $firstName, $lastName, $userPassword, $emailAddress, $roleId) {
+        public static function CreateUser($username, $firstName, $lastName, $userPassword, $emailAddress, $roleIds) {
                 echo "Database inserting user row with username [$username]<br>";
-        
-                $row = [
-                        'uid' => $username,
-                        'user_role_id' => $roleId,
-                        'first_name' => $firstName,
-                        'last_name' => $lastName,
-                        'email' => $emailAddress,
-                        'password' => bcrypt($userPassword),
-                        "is_system_admin" => 0,
-                ];
 
-                DB::table('users')->insert($row);
+                $user = User::where("uid", $username)->first();
+        
+                if ($user) {
+                        throw new Exception("User already exists");
+                }
+
+                $user = new User();
+
+                $user->uid = $username;
+                $user->first_name = $firstName;
+                $user->last_name = $lastName;
+                $user->password = bcrypt($userPassword);
+                $user->email = $emailAddress;
+
+                $user->save();
+
+                foreach ($roleIds as $roleId) {
+                        $role =  Role::where("id", $roleId)->first();
+
+                        $arguments = array("role_id" => $roleId, "user_id" => $user->id);
+
+                        $role_mapping = RoleUser::where($arguments)->first();
+        
+                        if (!$role_mapping) {
+                                $user->roles()->attach($role);
+                        }    
+                }
         }
+
 }

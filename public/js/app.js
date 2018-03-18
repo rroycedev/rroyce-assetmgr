@@ -53247,6 +53247,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -53267,7 +53277,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             first_name: '',
             last_name: '',
             userpassword: '',
-            groupid: 0
+            groupid: 0,
+            roleIds: []
         };
     },
     created: function created() {
@@ -53280,6 +53291,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        toggleRole: function toggleRole(roleId) {
+            if (this._data.roleIds.includes(roleId)) {
+                var index = this._data.roleIds.indexOf(roleId);
+                if (index > -1) {
+                    this._data.roleIds.splice(index, 1);
+                }
+            } else {
+                this._data.roleIds.push(roleId);
+            }
+
+            this.$forceUpdate();
+        },
         createUser: function createUser(event) {
             if (this._isMounted) {
                 return;
@@ -53322,27 +53345,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _vm.message != ""
-        ? _c(
-            "div",
-            {
-              class: [
-                _vm.messagetype == "success"
-                  ? "alert alert-success  col-md-6 col-md-offset-6"
-                  : "alert alert-danger  col-md-6 col-md-offset-6",
-                "alert alert-success  col-md-6 col-md-offset-6"
-              ],
-              attrs: { role: "alert" }
-            },
-            [
-              _vm._v(
-                "\n               " + _vm._s(_vm.message) + "\n           "
+    _vm.message != null && _vm.message != ""
+      ? _c("div", { staticClass: "row" }, [
+          _vm.message != ""
+            ? _c(
+                "div",
+                {
+                  class: [
+                    _vm.messagetype == "success"
+                      ? "alert alert-success  col-md-6 col-md-offset-6"
+                      : "alert alert-danger  col-md-6 col-md-offset-6",
+                    "alert alert-success  col-md-6 col-md-offset-6"
+                  ],
+                  attrs: { role: "alert" }
+                },
+                [
+                  _vm._v(
+                    "\n               " + _vm._s(_vm.message) + "\n           "
+                  )
+                ]
               )
-            ]
-          )
-        : _vm._e()
-    ]),
+            : _vm._e()
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "card create-user-card" }, [
       _c("div", { staticClass: "card-header" }, [_vm._v("Create User")]),
@@ -53487,44 +53512,68 @@ var render = function() {
           _vm._m(5),
           _vm._v(" "),
           _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.groupid,
-                  expression: "groupid"
-                }
-              ],
-              staticClass: "form-select department-select",
-              attrs: { id: "group_id", name: "group_id" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.groupid = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            _vm._l(_vm.groups, function(group) {
-              return _c(
-                "option",
-                {
-                  key: group.user_role_id,
-                  domProps: { value: group.user_role_id }
-                },
-                [_vm._v(_vm._s(group.role_name))]
+            "div",
+            { staticStyle: { "max-height": "300px", "overflow-y": "auto" } },
+            [
+              _c(
+                "ul",
+                { staticStyle: { margin: "0px", padding: "10px" } },
+                _vm._l(_vm.groups, function(group) {
+                  return _c(
+                    "li",
+                    { key: group.id, staticStyle: { "list-style": "none" } },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.roleIds,
+                            expression: "roleIds"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          name: "role_" + group.id,
+                          id: "role_" + group.id
+                        },
+                        domProps: {
+                          value: group.id,
+                          checked: Array.isArray(_vm.roleIds)
+                            ? _vm._i(_vm.roleIds, group.id) > -1
+                            : _vm.roleIds
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.roleIds,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = group.id,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.roleIds = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.roleIds = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.roleIds = $$c
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "role_" + group.id } }, [
+                        _vm._v(_vm._s(group.name))
+                      ])
+                    ]
+                  )
+                })
               )
-            })
+            ]
           )
         ]),
         _vm._v(" "),
@@ -53681,11 +53730,7 @@ var staticRenderFns = [
           staticClass: "input-group-text user-create-edit-label",
           attrs: { id: "inputGroup-sizing-sm" }
         },
-        [
-          _c("div", { staticClass: "user-create-edit-label" }, [
-            _vm._v("Group")
-          ])
-        ]
+        [_c("div", { staticClass: "user-create-edit-label" }, [_vm._v("Role")])]
       )
     ])
   },
@@ -54117,7 +54162,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54155,6 +54200,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         groupname: {
             type: String
         }
+    },
+    methods: {
+        hasRole: function hasRole(user, roleName) {
+            var found = false;
+
+            user.roles.forEach(function (role) {
+                if (role.name == roleName) {
+                    found = true;
+                }
+            });
+
+            return found;
+        }
     }
 });
 
@@ -54175,7 +54233,8 @@ var render = function() {
     _c("aside", { staticClass: "app-sidebar" }, [
       _vm.user != null
         ? _c("ul", { staticClass: "app-menu" }, [
-            _vm.user.user_role_id == 1
+            _vm.hasRole(_vm.user, "Administrator") ||
+            _vm.hasRole(_vm.user, "User Manager")
               ? _c("li", { staticClass: "treeview" }, [
                   _vm._m(0),
                   _vm._v(" "),

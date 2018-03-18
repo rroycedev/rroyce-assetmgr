@@ -75,6 +75,9 @@ class UsersController extends Controller
 
     public function index(/* AdldapServiceProvider $provider */) {
     //    $this->adldap = $provider;
+        $user = Auth::user();
+
+        $user->GetRoles();
 
         $driverName = env('ASSETMGR_USER_PROVIDER_DRIVER', 'eloquent');
 
@@ -101,9 +104,14 @@ class UsersController extends Controller
     }
     public function create(Request $request)
     {
+        $user = Auth::user();
+
+        $user->GetRoles();
+
         $message = $request->session()->get('message');
         $messagetype = $request->session()->get('messagetype');
                 
+        #a
         $data = ["data" => array("groups" => $this->userGroups(), "message" => $message, "messagetype" => $messagetype)];
 
         return view('user.create', $data );
@@ -123,18 +131,18 @@ class UsersController extends Controller
         $firstName = $formInput["first_name"];
         $lastName = $formInput["last_name"];
         $userPassword = $formInput["userpassword"];
-        $roleId = $formInput["group_id"];
-        
-        echo "Calling Eloquent create user<br>";
- 
 
-        $roles = DatabaseAuthHelper::GetRoles();
+        $roleIds = array();
 
-        $roleName = $roles[$roleId];
+        foreach ($formInput as $key => $val) {
+            if (substr($key, 0, 5) == "role_") {
+                $roleId = substr($key, 5);
+                $roleIds[] = $roleId;
+            }
+        }
 
         try {
-            DatabaseAuthHelper::CreateUser($username, $firstName, $lastName, $userPassword, '', $roleId, $roleName);
-
+            DatabaseAuthHelper::CreateUser($username, $firstName, $lastName, $userPassword, '', $roleIds);
 
             $request->session()->put('message', "User $username has been created successfully");
             $request->session()->put('messagetype', "success");
@@ -176,14 +184,11 @@ class UsersController extends Controller
     { 
         $formInput = $request->all();
 
+        
         $username = $formInput["username"];
         $firstName = $formInput["first_name"];
         $lastName = $formInput["last_name"];
         $userPassword = $formInput["userpassword"];
-        $groupId = $formInput["group_id"];
-        echo "Provider: " . $this->userProviderDriverName() . "\n";
-
-
 
         switch ($this->userProviderDriverName()) {
         case "eloquent":
